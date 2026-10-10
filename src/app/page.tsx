@@ -1,69 +1,102 @@
-import Image from "next/image";
+
+import Link from "next/link";
+
+const pages = [
+  {
+    number: "01",
+    title: "Member Registration",
+    description:
+      "Create your profile and preview your member card in real time.",
+    href: "/register",
+  },
+  {
+    number: "02",
+    title: "Admin Moderation",
+    description:
+      "Review member applications and manage approval status.",
+    href: "/admin",
+  },
+  {
+    number: "03",
+    title: "Meet the Members",
+    description:
+      "Discover approved members and explore their domains.",
+    href: "/team",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-[#080B12] text-white">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+        <Link href="/" className="text-2xl font-bold tracking-tight">
+          VYNTHRA<span className="text-violet-400">.</span>
+        </Link>
+        <span className="rounded-full border border-white/10 px-4 py-2 text-xs text-gray-400">
+          EM BRIONE · RECRUITMENT PROJECT
+        </span>
+      </nav>
+
+      <section className="mx-auto max-w-7xl px-6 pb-20 pt-16 md:pt-28">
+        <div className="max-w-3xl">
+          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-violet-400">
+            A new way to connect
           </p>
+
+          <h1 className="text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
+            Every member.
+            <br />
+            One <span className="text-violet-400">community.</span>
+          </h1>
+
+          <p className="mt-6 max-w-xl text-lg leading-8 text-gray-400">
+            A modern onboarding and moderation platform built to make
+            registration, profile discovery, and member approvals simple.
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-4">
+            <Link
+              href="/register"
+              className="rounded-xl bg-violet-500 px-6 py-3 font-semibold transition hover:bg-violet-400"
+            >
+              Register now →
+            </Link>
+            <Link
+              href="/team"
+              className="rounded-xl border border-white/15 px-6 py-3 font-semibold transition hover:bg-white/5"
+            >
+              Explore directory
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="mt-20 grid gap-5 md:grid-cols-3">
+          {pages.map((page) => (
+            <Link
+              href={page.href}
+              key={page.number}
+              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:-translate-y-1 hover:border-violet-400/50 hover:bg-white/[0.06]"
+            >
+              <span className="text-sm text-violet-400">
+                {page.number}
+              </span>
+              <h2 className="mt-8 text-xl font-semibold">
+                {page.title}
+              </h2>
+              <p className="mt-3 leading-7 text-gray-400">
+                {page.description}
+              </p>
+              <p className="mt-6 text-sm font-medium text-violet-300">
+                Explore feature ↗
+              </p>
+            </Link>
+          ))}
         </div>
-      </main>
-    </div>
+
+        <footer className="mt-24 border-t border-white/10 pt-6 text-sm text-gray-500">
+          Vynthra · Built for The Embrione recruitment challenge
+        </footer>
+      </section>
+    </main>
   );
 }
