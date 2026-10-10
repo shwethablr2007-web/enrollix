@@ -1,9 +1,8 @@
+```ts
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { COOKIE_NAME, verifyAdminSession } from "@/lib/adminAuth";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-
-
 
 async function isAdminLoggedIn() {
   const cookieStore = await cookies();
@@ -26,14 +25,18 @@ export async function GET() {
       .order("created_at", { ascending: false });
 
     if (error) {
+      console.error("Supabase members load error:", error);
+
       return NextResponse.json(
-        { error: "Unable to load members." },
+        { error: error.message },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ members: data ?? [] });
-  } catch {
+  } catch (error) {
+    console.error("Admin members GET error:", error);
+
     return NextResponse.json(
       { error: "Server error while loading members." },
       { status: 500 }
@@ -51,6 +54,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json();
+
     const id = typeof body.id === "string" ? body.id : "";
     const status = body.status;
 
@@ -72,17 +76,22 @@ export async function PATCH(request: NextRequest) {
       .single();
 
     if (error) {
+      console.error("Supabase member update error:", error);
+
       return NextResponse.json(
-        { error: "Unable to update this application." },
+        { error: error.message },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ member: data });
-  } catch {
+  } catch (error) {
+    console.error("Admin members PATCH error:", error);
+
     return NextResponse.json(
       { error: "Unable to process the request." },
       { status: 400 }
     );
   }
 }
+```
