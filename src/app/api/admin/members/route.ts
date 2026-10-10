@@ -1,4 +1,4 @@
-```ts
+
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { COOKIE_NAME, verifyAdminSession } from "@/lib/adminAuth";
@@ -94,4 +94,4 @@ export async function PATCH(request: NextRequest) {
     );
   }
 }
-```
+
